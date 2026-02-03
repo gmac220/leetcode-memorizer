@@ -1,68 +1,94 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  // ===== ALGORITHMS =====
   const select = document.getElementById("algoSelect");
   const when = document.getElementById("when");
   const solution = document.getElementById("solution");
-  const revealBtn = document.getElementById("revealBtn");
+  const userInput = document.getElementById("userInput");
+  const feedback = document.getElementById("feedback");
+
+  const toggleBtn = document.getElementById("toggleSolutionBtn");
+  const submitBtn = document.getElementById("submitBtn");
+
+  let solutionVisible = false;
 
   algorithms.forEach((algo, i) => {
-    const option = document.createElement("option");
-    option.value = i;
-    option.textContent = algo.name;
-    select.appendChild(option);
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = algo.name;
+    select.appendChild(opt);
   });
 
   select.addEventListener("change", () => {
     const algo = algorithms[select.value];
     when.textContent = algo.when;
-    solution.textContent = "";
-  });
-
-  revealBtn.addEventListener("click", () => {
-    const algo = algorithms[select.value];
     solution.textContent = algo.template;
+    solution.classList.add("hidden");
+    userInput.value = "";
+    feedback.textContent = "";
+    solutionVisible = false;
+    toggleBtn.textContent = "Reveal Solution";
   });
 
-  // FLASHCARDS
-    let currentIndex = 0;
-    let showingFront = true;
-    let currentSet = flashcards.algorithms;
+  toggleBtn.addEventListener("click", () => {
+    solutionVisible = !solutionVisible;
+    solution.classList.toggle("hidden");
+    toggleBtn.textContent = solutionVisible
+      ? "Hide Solution"
+      : "Reveal Solution";
+  });
 
-    const flashcardText = document.getElementById("flashcardText");
-    const flashcard = document.getElementById("flashcard");
-    const nextBtn = document.getElementById("nextCard");
-    const prevBtn = document.getElementById("prevCard");
-    const flipBtn = document.getElementById("flipCard");
-    const typeSelect = document.getElementById("flashcardType");
+  submitBtn.addEventListener("click", () => {
+    const algo = algorithms[select.value];
+    const normalize = str =>
+      str.replace(/\s+/g, "").toLowerCase();
 
-    function renderFlashcard() {
-    const card = currentSet[currentIndex];
-    flashcardText.textContent = showingFront ? card.front : card.back;
+    if (normalize(userInput.value) === normalize(algo.template)) {
+      feedback.textContent = "✅ Correct recall!";
+    } else {
+      feedback.textContent = "❌ Not quite. Review and try again.";
     }
+  });
 
-    flipBtn.addEventListener("click", () => {
-    showingFront = !showingFront;
-    renderFlashcard();
-    });
+  // ===== FLASHCARDS =====
+  let index = 0;
+  let front = true;
+  let currentSet = flashcards.algorithms;
 
-    nextBtn.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % currentSet.length;
-    showingFront = true;
-    renderFlashcard();
-    });
+  const flashcardText = document.getElementById("flashcardText");
+  const flip = document.getElementById("flipCard");
+  const next = document.getElementById("nextCard");
+  const prev = document.getElementById("prevCard");
+  const type = document.getElementById("flashcardType");
 
-    prevBtn.addEventListener("click", () => {
-    currentIndex =
-        (currentIndex - 1 + currentSet.length) % currentSet.length;
-    showingFront = true;
-    renderFlashcard();
-    });
+  function renderCard() {
+    const card = currentSet[index];
+    flashcardText.textContent = front ? card.front : card.back;
+  }
 
-    typeSelect.addEventListener("change", () => {
-    currentSet = flashcards[typeSelect.value];
-    currentIndex = 0;
-    showingFront = true;
-    renderFlashcard();
-    });
+  flip.onclick = () => {
+    front = !front;
+    renderCard();
+  };
 
-    renderFlashcard();
+  next.onclick = () => {
+    index = (index + 1) % currentSet.length;
+    front = true;
+    renderCard();
+  };
+
+  prev.onclick = () => {
+    index = (index - 1 + currentSet.length) % currentSet.length;
+    front = true;
+    renderCard();
+  };
+
+  type.onchange = () => {
+    currentSet = flashcards[type.value];
+    index = 0;
+    front = true;
+    renderCard();
+  };
+
+  renderCard();
 });

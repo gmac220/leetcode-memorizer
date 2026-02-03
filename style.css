@@ -1,19 +1,52 @@
+body {
+  background: #121212;
+  color: #e0e0e0;
+  font-family: system-ui, sans-serif;
+  padding: 20px;
+}
+
+select, textarea, button {
+  background: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #333;
+  padding: 8px;
+  margin: 5px 0;
+}
+
+textarea {
+  width: 100%;
+}
+
+button:hover {
+  background: #333;
+  cursor: pointer;
+}
+
+pre {
+  background: #1e1e1e;
+  padding: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.hidden {
+  display: none;
+}
+
 .flashcard {
   margin: 20px auto;
   padding: 30px;
   width: 400px;
   min-height: 120px;
-  border: 2px solid #333;
-  border-radius: 10px;
-  font-size: 20px;
+  border: 2px solid #444;
+  border-radius: 12px;
+  background: #1e1e1e;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f9f9f9;
-  cursor: pointer;
+  font-size: 20px;
 }
 
 .flashcard-controls button {
   margin: 5px;
-  padding: 10px 15px;
 }

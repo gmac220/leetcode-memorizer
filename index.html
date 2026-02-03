@@ -15,35 +15,43 @@
   <p id="when"></p>
 
   <h3>Your Recall</h3>
-  <textarea id="userInput" rows="12" cols="80"></textarea>
+  <textarea id="userInput" rows="12"></textarea>
 
-  <button id="revealBtn">Reveal Canonical Solution</button>
+  <div class="controls">
+    <button id="submitBtn">Submit Recall</button>
+    <button id="toggleSolutionBtn">Reveal Solution</button>
+  </div>
+
+  <p id="feedback"></p>
 
   <h3>Canonical Template</h3>
-  <pre id="solution"></pre>
+  <pre id="solution" class="hidden"></pre>
 
+  <hr />
+
+  <h2>Flashcards</h2>
+
+  <select id="flashcardType">
+    <option value="algorithms">Algorithms</option>
+    <option value="dataStructures">Data Structures</option>
+    <option value="principles">Core Principles</option>
+  </select>
+
+  <div id="flashcard" class="flashcard">
+    <p id="flashcardText"></p>
+  </div>
+
+  <div class="flashcard-controls">
+    <button id="prevCard">Previous</button>
+    <button id="flipCard">Flip</button>
+    <button id="nextCard">Next</button>
+  </div>
+
+  <!-- DATA FIRST -->
   <script src="data/algorithms.js" defer></script>
+  <script src="data/flashcards.js" defer></script>
+
+  <!-- LOGIC LAST -->
   <script src="app.js" defer></script>
 </body>
-
-<hr />
-
-<h2>Flashcards</h2>
-
-<select id="flashcardType">
-  <option value="algorithms">Algorithms</option>
-  <option value="dataStructures">Data Structures</option>
-</select>
-
-<div id="flashcard" class="flashcard">
-  <p id="flashcardText"></p>
-</div>
-
-<div class="flashcard-controls">
-  <button id="prevCard">Previous</button>
-  <button id="flipCard">Flip</button>
-  <button id="nextCard">Next</button>
-</div>
-
-<script src="data/flashcards.js" defer></script>
 </html>
