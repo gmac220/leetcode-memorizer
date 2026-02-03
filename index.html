@@ -7,8 +7,9 @@
 <body>
   <h1>LeetCode Algorithm Memorizer</h1>
 
-  <option disabled selected>Select an algorithm</option>
-  <select id="algoSelect"></select>
+  <select id="algoSelect">
+    <option disabled selected>Select an algorithm</option>
+  </select>
 
   <h3>When to Use</h3>
   <p id="when"></p>
@@ -16,7 +17,7 @@
   <h3>Your Recall</h3>
   <textarea id="userInput" rows="12" cols="80"></textarea>
 
-  <button onclick="reveal()">Reveal Canonical Solution</button>
+  <button id="revealBtn">Reveal Canonical Solution</button>
 
   <h3>Canonical Template</h3>
   <pre id="solution"></pre>
@@ -24,4 +25,25 @@
   <script src="data/algorithms.js" defer></script>
   <script src="app.js" defer></script>
 </body>
+
+<hr />
+
+<h2>Flashcards</h2>
+
+<select id="flashcardType">
+  <option value="algorithms">Algorithms</option>
+  <option value="dataStructures">Data Structures</option>
+</select>
+
+<div id="flashcard" class="flashcard">
+  <p id="flashcardText"></p>
+</div>
+
+<div class="flashcard-controls">
+  <button id="prevCard">Previous</button>
+  <button id="flipCard">Flip</button>
+  <button id="nextCard">Next</button>
+</div>
+
+<script src="data/flashcards.js" defer></script>
 </html>

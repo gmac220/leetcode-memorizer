@@ -1,0 +1,19 @@
+.flashcard {
+  margin: 20px auto;
+  padding: 30px;
+  width: 400px;
+  min-height: 120px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+.flashcard-controls button {
+  margin: 5px;
+  padding: 10px 15px;
+}
