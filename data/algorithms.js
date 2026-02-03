@@ -16,7 +16,9 @@ const algorithms = [
     template: `def two_pointers(arr):
     left, right = 0, len(arr)-1
     while left < right:
-        pass`
+        l += 1
+        r -= 1
+    `
   },
   {
     id: "binary_search",
@@ -25,7 +27,7 @@ const algorithms = [
     template: `def binary_search(arr, target):
     l, r = 0, len(arr)-1
     while l <= r:
-        m = (l+r)//2`
+        mid = (l+r)//2`
   },
   {
     id: "dfs",
@@ -42,9 +44,17 @@ const algorithms = [
     when: "Shortest path, level order traversal",
     template: `from collections import deque
 def bfs(root):
-    q = deque([root])
-    while q:
-        node = q.popleft()`
+	q = deque([root])
+	visited = set([root])
+	
+	while q:
+		current_node = q.popleft()
+	
+	for element in get_neighbors(q):
+		if element not in visited:
+			q.append(element)
+			visited.add(element)
+    `
   },
   {
     id: "heap",
@@ -70,6 +80,15 @@ for i in range(1, n+1):
     if condition: return
     for i in choices:
         backtrack(path)`
-  }
+  },
+  {
+    id: "recursion",
+    name: "Recursion",
+    when: "",
+    template: `def recurse(params):
+    if base_case: return
+    recurse(next_params)
+    `
+  },
 ];
 
