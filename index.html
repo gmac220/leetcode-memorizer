@@ -36,15 +36,23 @@
     <option value="dataStructures">Data Structures</option>
   </select>
 
+  <div class="flashcard-main-wrapper">
+  <!-- Left Arrow -->
+  <button id="prevCard" class="arrow-btn">&#8249;</button>
+
+  <!-- The Card -->
   <div id="flashcard" class="flashcard">
     <p id="flashcardText"></p>
   </div>
 
-  <div class="flashcard-controls">
-    <button id="prevCard">Previous</button>
-    <button id="flipCard">Flip</button>
-    <button id="nextCard">Next</button>
-  </div>
+  <!-- Right Arrow -->
+  <button id="nextCard" class="arrow-btn">&#8250;</button>
+</div>
+
+<!-- Keep Flip button below or remove if you prefer clicking the card only -->
+<div class="flashcard-controls">
+  <button id="shuffleCards">Shuffle Deck 🔀</button>
+</div>
 
   <!-- DATA FIRST -->
   <script src="data/algorithms.js" defer></script>

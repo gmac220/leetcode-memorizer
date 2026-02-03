@@ -50,3 +50,29 @@ pre {
 .flashcard-controls button {
   margin: 5px;
 }
+
+#flashcard {
+  cursor: pointer;
+  user-select: none; /* Prevents text highlighting while clicking fast */
+}
+
+.flashcard-main-wrapper {
+  display: flex;
+  align-items: center; /* Centers arrows vertically */
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.arrow-btn {
+  background: none;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.arrow-btn:hover {
+  color: #007bff; /* Change color on hover */
+}
