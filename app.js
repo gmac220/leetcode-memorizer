@@ -30,6 +30,53 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleBtn.textContent = "Reveal Solution";
   });
 
+userInput.addEventListener("keydown", (e) => {
+  const start = userInput.selectionStart;
+  const end = userInput.selectionEnd;
+  const value = userInput.value;
+
+  if (e.key === "Tab") {
+    e.preventDefault();
+    const start = userInput.selectionStart;
+    const end = userInput.selectionEnd;
+
+    if (e.shiftKey) {
+      // UNTAB: Remove up to 4 spaces before the cursor
+      const before = userInput.value.substring(0, start);
+      const after = userInput.value.substring(end);
+      const match = before.match(/ {1,4}$/); // Matches 1-4 spaces at the end of the 'before' string
+
+      if (match) {
+        userInput.value = before.substring(0, before.length - match[0].length) + after;
+        userInput.selectionStart = userInput.selectionEnd = start - match[0].length;
+      }
+    } else {
+      // TAB: Insert 4 spaces
+      userInput.value = userInput.value.substring(0, start) + "    " + userInput.value.substring(end);
+      userInput.selectionStart = userInput.selectionEnd = start + 4;
+    }
+  }
+  else if (e.key === "Enter") {
+    e.preventDefault();
+
+    // 1. Find the start of the current line
+    const lastNewline = value.lastIndexOf("\n", start - 1);
+    const lineStart = lastNewline + 1;
+
+    // 2. Get the current line's text and its leading whitespace
+    const currentLine = value.substring(lineStart, start);
+    const whitespaceMatch = currentLine.match(/^\s*/);
+    const indentation = whitespaceMatch ? whitespaceMatch[0] : "";
+
+    // 3. Insert newline + the same indentation
+    userInput.value = value.substring(0, start) + "\n" + indentation + value.substring(end);
+
+    // 4. Move cursor to the end of the new indentation
+    const newPos = start + 1 + indentation.length;
+    userInput.selectionStart = userInput.selectionEnd = newPos;
+  }
+});
+
   toggleBtn.addEventListener("click", () => {
     solutionVisible = !solutionVisible;
     solution.classList.toggle("hidden");
