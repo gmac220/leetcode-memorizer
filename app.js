@@ -9,8 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const toggleBtn = document.getElementById("toggleSolutionBtn");
   const submitBtn = document.getElementById("submitBtn");
+  const whenBtn = document.getElementById("whenBtn")
 
   let solutionVisible = false;
+  let whenAnswerVisible = false;
 
   algorithms.forEach((algo, i) => {
     const opt = document.createElement("option");
@@ -24,10 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
     when.textContent = algo.when;
     solution.textContent = algo.template;
     solution.classList.add("hidden");
+    algorithmTemplate.classList.add("hidden");
     userInput.value = "";
     feedback.textContent = "";
     solutionVisible = false;
+    whenAnswerVisible = false;
     toggleBtn.textContent = "Reveal Solution";
+    whenBtn.textContent = "Reveal when to use";
   });
 
 userInput.addEventListener("keydown", (e) => {
@@ -77,9 +82,20 @@ userInput.addEventListener("keydown", (e) => {
   }
 });
 
+  whenBtn.addEventListener("click", () => {
+    whenAnswerVisible = !whenAnswerVisible;
+    when.classList.toggle("hidden");
+    whenBtn.textContent = whenAnswerVisible
+      ? "Hide when to use"
+      : "Reveal when to use";
+  });
+
   toggleBtn.addEventListener("click", () => {
     solutionVisible = !solutionVisible;
     solution.classList.toggle("hidden");
+    algorithmTemplate.classList.toggle("hidden");
+    
+    
     toggleBtn.textContent = solutionVisible
       ? "Hide Solution"
       : "Reveal Solution";
