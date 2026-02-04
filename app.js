@@ -117,6 +117,7 @@ userInput.addEventListener("keydown", (e) => {
   let index = 0;
   let front = false;
   let currentSet = [...flashcards.algorithms];
+  let clickedCard = false;
 
   const flashcardText = document.getElementById("flashcardText");
   const next = document.getElementById("nextCard");
@@ -128,11 +129,13 @@ userInput.addEventListener("keydown", (e) => {
 
       swapBtn.onclick = () => {
         front = !front;
+        renderCard();
     }
 
     // Add this event listener to handle the click
     flashcard.onclick = () => {
         front = !front;
+        clickedCard = true;
         renderCard();
     };
 
@@ -148,7 +151,12 @@ userInput.addEventListener("keydown", (e) => {
       [currentSet[i], currentSet[j]] = [currentSet[j], currentSet[i]];
     }
     index = 0;
-    front = front;
+    if(clickedCard){
+      front = !front;
+      clickedCard = false;
+    }else{
+      front = front;
+    }
     renderCard();
   }
 
@@ -156,20 +164,35 @@ userInput.addEventListener("keydown", (e) => {
 
   next.onclick = () => {
     index = (index + 1) % currentSet.length;
-    front = front;
+    if(clickedCard){
+      front = !front;
+      clickedCard = false;
+    }else{
+      front = front;
+    }
     renderCard();
   };
 
   prev.onclick = () => {
     index = (index - 1 + currentSet.length) % currentSet.length;
-    front = front;
+    if(clickedCard){
+      front = !front;
+      clickedCard = false;
+    }else{
+      front = front;
+    }
     renderCard();
   };
 
   type.onchange = () => {
     currentSet = [...flashcards[type.value]];
     index = 0;
-    front = front;
+    if(clickedCard){
+      front = !front;
+      clickedCard = false;
+    }else{
+      front = front;
+    }
     renderCard();
   };
 

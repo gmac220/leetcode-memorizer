@@ -14,10 +14,10 @@ const algorithms = [
     name: "Two Pointers",
     when: "Sorted arrays, pairs, inward shrinking",
     template: `def two_pointers(arr):
-    left, right = 0, len(arr)-1
+    left, right = 0, len(arr) - 1
     while left < right:
-        l += 1
-        r -= 1
+        left += 1
+        right -= 1
     `
   },
   {
@@ -25,9 +25,9 @@ const algorithms = [
     name: "Binary Search",
     when: "Sorted or monotonic search space",
     template: `def binary_search(arr, target):
-    l, r = 0, len(arr)-1
-    while l <= r:
-        mid = (l+r)//2`
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2`
   },
   {
     id: "dfs",
@@ -44,15 +44,15 @@ const algorithms = [
     when: "Shortest path, level order traversal",
     template: `from collections import deque
 def bfs(root):
-	q = deque([root])
+	queue = deque([root])
 	visited = set([root])
 	
-	while q:
-		current_node = q.popleft()
+	while queue:
+		current_node = queue.popleft()
 	
 	for element in get_neighbors(q):
 		if element not in visited:
-			q.append(element)
+			queue.append(element)
 			visited.add(element)
     `
   },
